@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow fixed-top">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">{{ title }}</a
+    >
+    <button
+      class="navbar-toggler hidden-sm-up"
+      type="button"
+      (click)="isNavbarCollapsed = !isNavbarCollapsed"
+      data-target="#navbarsDefault"
+      aria-controls="navbarsDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="museums" [routerLinkActive]="['active']">Museums</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="exhibitions" [routerLinkActive]="['active']">Tentoonstellingen</a>
+        </li>
+        <li class="nav-item">
+            <a id="users" class="nav-link" routerLink="users" [routerLinkActive]="['active']">Gebruikers</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="about" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Over Musea</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li *ngIf="!(loggedInUser$ | async)" class="nav-item">
+          <a class="nav-link" routerLink="login">Login</a>
+        </li>
+        <li *ngIf="loggedInUser$ | async as user" class="nav-item dropdown">
+            <div ngbDropdown class="d-inline-block">
+                <a class="nav-link" id="dropdownMenu1" ngbDropdownToggle>{{ user.firstName }} {{ user.lastName }}</a
+            >
+            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <button
+                class="dropdown-item"
+                routerLink="profile"
+              >
+                Mijn profiel
+              </button>
+              <button
+                class="dropdown-item"
+                routerLink="profile/tickets"
+              >
+                Mijn tickets
+              </button>
+              <button
+                class="dropdown-item"
+                (click)="logOut()"
+              >
+                Log uit
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

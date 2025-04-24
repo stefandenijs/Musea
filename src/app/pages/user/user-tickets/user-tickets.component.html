@@ -1,0 +1,58 @@
+<div class="row no-gutters mx-auto" *ngIf="loggedInUser$ | async as user">
+    <div class="col-lg-12 col-md-12 col-sm-12 order-lg-1 order-second">
+        <h4>Tickets:</h4>
+        <p *ngIf="!tickets || tickets.length < 1">Geen tickets aanwezig</p>
+
+        <div class="mr-0 mr-md-4 mr-lg-4">
+            <div *ngFor="let ticket of tickets" class="col-12 p-0 mt-3 d-flex align-items-stretch">
+                <div class="border border-dark rounded shadow col-12">
+                    <div class="p-2 d-flex flex-column">
+                        <div class="row no-gutters border-bottom border-dark d-flex pb-2">
+                            <div class="col-12">
+                                <p class="h4">Tentoonstelling: {{ ticket.exhibition?.name }}</p>
+                            </div>
+                            <div class="col-12">
+                                <button *ngIf="ticket.status !== 'Geretourneerd' && ticket.status !== 'Geannuleerd'" (click)="refundTicket(ticket)" class="btn btn-dark">
+                  <span
+                    *ngIf="saving"
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span
+                  >Retourneer ticket <span class="sr-only">Saving...</span>
+                </button>
+                                <button *ngIf="ticket.status !== 'Geretourneerd' && ticket.status !== 'Geannuleerd'" (click)="cancelTicket(ticket)" class="btn btn-dark ml-1">
+                  <span
+                    *ngIf="cancelling"
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span
+                  >Annuleer ticket <span class="sr-only">Saving...</span>
+                </button>
+                            </div>
+                        </div>
+                        <p class="">Kenmerk: {{ ticket._id }}</p>
+                        <p class="mb-0">
+                            Gekocht op: {{ ticket.dateOfPurchase | date: 'shortDate' }} voor €{{ ticket.priceAtPurchase | number: '1.2-2' }} euro
+                        </p>
+                        <p class="mb-0">Status: {{ ticket.status }}</p>
+                        <div class="mt-3 border-top border-dark">
+                            <p class="mb-2 h5">Informatie</p>
+                            <p class="mb-0">Museum: {{ ticket.exhibition?.museum?.name }}</p>
+                            <p class="mb-0">
+                                Address: {{ ticket.exhibition?.museum?.street }} {{ ticket.exhibition?.museum?.streetNumber }}, {{ ticket.exhibition?.museum?.postalCode }} {{ ticket.exhibition?.museum?.city }}
+                            </p>
+                            <p class="mb-0">
+                                Periode: van {{ ticket.exhibition?.startDate | date: 'shortDate' }} tot en met {{ ticket.exhibition?.endDate | date: 'shortDate' }}
+                            </p>
+                            <p class="mb-0">
+                                Tijd: {{ ticket.exhibition?.dayStartTime }}-{{ ticket.exhibition?.dayEndTime }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

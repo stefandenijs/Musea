@@ -1,0 +1,29 @@
+<div class="d-flex mb-4 border-bottom border-dark">
+    <h2>Gebruikers</h2>
+    <div *ngIf="loggedInUser$ | async as user" class="ml-auto">
+        <a *ngIf="user.role === 'admin'" [routerLink]="['/users', 'new']" class="btn btn-dark">Voeg gebruiker toe</a>
+    </div>
+</div>
+
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="d-flex justify-content-center" *ngIf="users && users?.length == 0 && !loading">
+    <p class="h4">Geen gebruikers gevonden.</p>
+</div>
+
+<table *ngIf="users?.length != 0" class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Naam</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let user of users">
+        <td>
+            <a [title]="user.firstName + ' ' + user.lastName" [routerLink]="['/users', user._id]">{{
+        user.firstName + ' ' + user.lastName
+      }}</a>
+        </td>
+        <td>{{ user.email }}</td>
+    </tbody>
+</table>

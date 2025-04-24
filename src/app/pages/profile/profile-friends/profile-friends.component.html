@@ -1,0 +1,23 @@
+<div class="row no-gutters mx-auto" *ngIf="loggedInUser$ | async as user">
+    <div class="col-lg-12 col-md-12 col-sm-12 order-lg-1 order-second pr-lg-4">
+        <h4 class="border-bottom border-dark pb-2">Vrienden:</h4>
+        <table *ngIf="user.friends.length > 0" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Naam</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let friend of user.friends">
+                <td class="row no-gutters">
+                    <a class="my-auto" [title]="friend.firstName + ' ' + friend.lastName" [routerLink]="['/users', friend._id]">{{ friend.firstName + ' ' + friend.lastName }}</a
+          >
+          <div class="ml-auto">
+            <a class="btn btn-dark ml-auto" (click)="removeFriend(user._id!, friend._id!)">Verwijder</a>
+    </div>
+    </td>
+    </tbody>
+    </table>
+</div>
+
+<p *ngIf="user.friends.length < 1">Geen vrienden aanwezig</p>
+</div>

@@ -1,0 +1,144 @@
+<app-spinner *ngIf="!exhibition && loading"></app-spinner>
+
+<div *ngIf="exhibition">
+    <div [style.background-image]="'url(' + exhibition.imgUrl + ')'" class="jumbotron museum-cover">
+        <div class="col-lg-4 col-md-6 col-sm-12 rounded museum-cover-box p-3 text-white">
+            <h1 class="">{{ exhibition.name }}</h1>
+            <p class="h3">Thema: {{ exhibition.theme }}</p>
+            <div>
+                <a class="btn btn-outline-light" routerLink="../..">Naar museum</a>
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutters d-flex border-bottom border-dark mx-auto mt-4 pb-2">
+        <div class="col-lg-7 col-md-12 col-sm-12">
+            <h2>Beschrijving</h2>
+        </div>
+        <div *ngIf="loggedInUser$ | async as user" class="col-lg-5 col-md-12 col-sm-12 d-flex justify-content-lg-end">
+            <div *ngIf="user.role === 'admin' || user.role === 'staff'">
+                <div>
+                    <a [routerLink]="['/museums', exhibition.museum?._id, 'exhibitions', exhibition._id, 'edit']" class="btn btn-dark ml-auto">Wijzig tentoonstelling</a
+          >
+          <button (click)="delete()" class="btn btn-dark mt-1 mt-md-0 mt-lg-0 ml-md-1 ml-lg-1">
+            <span
+              *ngIf="deleting"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Verwijder tentoonstelling
+            <span class="sr-only">Deleting...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container p-0 mt-2">
+    <div class="row m-auto">
+      <div class="col-lg-9 p-0 pr-lg-2">
+        <p>{{ exhibition.description }}</p>
+      </div>
+      <div class="col-lg-3 rounded bg-dark text-white">
+        <div class="px-2 py-3">
+          <div class="d-flex mb-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-info-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+              />
+            </svg>
+            <p class="h5 ml-2 mt-1">Informatie</p>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-4 mb-2">
+              <div class="d-flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-geo-alt mt-2"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"
+                  />
+                  <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+                <div class="ml-2">
+                  <p class="mb-0">{{ exhibition.museum?.street + ' ' + exhibition.museum?.streetNumber }}</p>
+                  <p class="mb-0">{{ exhibition.museum?.city }}, {{ exhibition.museum?.postalCode }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-4 mb-2">
+              <div class="d-flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-calendar-date mt-1"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"
+                  />
+                  <path
+                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                  />
+                </svg>
+                <div class="ml-2">
+                  <p class="mb-0">{{ exhibition.startDate | date: 'longDate' }} t/m</p>
+                  <p class="mb-0">{{ exhibition.endDate | date: 'longDate' }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-4 mb-2">
+              <div class="d-flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-clock"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"
+                  />
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                </svg>
+                <p class="mb-0 ml-2">{{ exhibition.dayStartTime }}-{{ exhibition.dayEndTime }}</p>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-4">
+              <div class="d-flex">
+                <p *ngIf="exhibition.price > 0; else free" class="mb-0">
+                  Entreeprijs: € {{ exhibition.price | number: '1.2-2' }}
+                </p>
+                <ng-template #free>Entreeprijs: gratis</ng-template>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="loggedInUser$ | async as user" class="mt-2">
+            <button (click)="buyTicket()" class="btn btn-block btn-outline-light">Koop entreeticket</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!exhibition && !loading">
+  <h2>Tentoonstelling</h2>
+  <hr class="border-dark mb-4" />
+  <p class="h4 text-center">Tentoonstelling op id {{ exhibitionId }} kon niet gevonden worden.</p>
+</div>

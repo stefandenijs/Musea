@@ -1,0 +1,12 @@
+<div class="row no-gutters mx-auto" *ngIf="loggedInUser$ | async as user">
+    <div class="col-lg-12 col-md-12 col-sm-12 order-lg-1 order-second">
+        <h4>Details:</h4>
+        <p class="m-0">Naam: {{ user.firstName + ' ' + user.lastName }}</p>
+        <p class="m-0">Email: {{ user.email }}</p>
+        <p class="m-0">Geslacht: {{ user.gender }}</p>
+        <p class="m-0">Geboortedatum: {{ user.birthDate | date: 'dd-MM-yyyy' }}</p>
+        <div class="mt-2">
+            <a [routerLink]="['/profile', 'details', 'edit']" class="btn btn-dark">Wijzig gegevens</a>
+        </div>
+    </div>
+</div>

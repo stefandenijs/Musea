@@ -1,0 +1,62 @@
+<div class="row d-flex">
+    <div class="col-lg-7 col-md-12 col-sm-12">
+        <h2>Account informatie</h2>
+    </div>
+    <div *ngIf="user && loggedInUser$ | async as logUser" class="col-lg-5 col-md-12 col-sm-12 d-flex justify-content-lg-end">
+        <div *ngIf="user?._id !== logUser._id && !isFriend">
+            <button (click)="sendRequest(logUser._id!)" class="btn btn-dark">
+        <span
+          *ngIf="deleting"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Stuur vriendschap verzoek
+        <span class="sr-only">Sending...</span>
+      </button>
+        </div>
+        <div *ngIf="logUser.role === 'admin' && user?._id !== logUser._id">
+            <button id="deletebutton" (click)="deleteUser()" class="btn btn-dark ml-1">
+        <span
+          *ngIf="deleting"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Verwijder gebruiker
+        <span class="sr-only">Deleting...</span>
+      </button>
+        </div>
+    </div>
+</div>
+<hr class="border-dark mb-4" />
+
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="row no-gutters mx-auto" *ngIf="user">
+    <div class="col-lg-7 col-md-6 col-sm-12 order-lg-1 order-second my-3 my-md-0 my-lg-0">
+        <router-outlet></router-outlet>
+    </div>
+
+    <div class="
+      col-lg-5 col-md-6 col-sm-12
+      order-lg-2 order-md-2 order-first
+      p-3
+      d-flex
+      flex-column
+      mb-auto
+      shadow-sm
+      border border-dark
+    ">
+        <a routerLink="details" class="btn btn-dark">Details</a>
+        <a routerLink="friends" class="btn btn-dark mt-1">Vrienden</a>
+        <div *ngIf="loggedInUser$ | async as logUser" class="d-flex">
+            <a *ngIf="logUser.role === 'admin' || logUser.role === 'staff'" routerLink="tickets" class="btn btn-dark btn-block mt-1">Tickets</a
+      >
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="!user && !loading">
+  <p class="h4">Gebruiker op id {{ userId }} kon niet gevonden worden.</p>
+</div>

@@ -1,0 +1,57 @@
+<div class="col-lg-6 col-md-12 col-sm-12 p-4 border shadow d-flex flex-column mx-auto">
+    <h1>Login</h1>
+
+    <div *ngIf="error" class="p-1 alert alert-danger">
+        <p class="m-0">{{error}}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" class="form-control" formControlName="email" type="text" placeholder="Email" [class.invalid]="
+          (submitted && form.controls['email'].invalid) ||
+          (form.controls['email'].invalid && form.controls['email'].dirty)
+        " required />
+            <div *ngIf="
+          (submitted && form.controls['email'].invalid) ||
+          (form.controls['email'].invalid && form.controls['email'].dirty)
+        " class="alert mb-0 p-0">
+                <small class="text-danger" *ngIf="form.controls['email'].hasError('required')">
+          Email is verplicht.
+        </small>
+                <small id="invalid-email" class="text-danger" *ngIf="form.controls['email'].hasError('email')">
+          Voer in een geldig email.
+        </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Wachtwoord</label>
+            <input id="password" class="form-control" formControlName="password" type="password" placeholder="Wachtwoord" [class.invalid]="
+          (submitted && form.controls['password'].invalid) ||
+          (form.controls['password'].invalid && form.controls['password'].dirty)
+        " required />
+            <div *ngIf="
+          (submitted && form.controls['password'].invalid) ||
+          (form.controls['password'].invalid && form.controls['password'].dirty)
+        " class="alert mb-0 p-0">
+                <small class="text-danger" *ngIf="form.controls['password'].hasError('required')">
+          Wachtwoord is verplicht.
+        </small>
+            </div>
+            <small>Nog geen account? Registreer <a routerLink="/register">hier.</a></small>
+        </div>
+
+        <div class="form-group">
+            <button id="submitbutton" type="submit" class="btn btn-dark">
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Inloggen
+        <span *ngIf="loading" class="sr-only">Saving...</span>
+      </button>
+        </div>
+    </form>
+</div>

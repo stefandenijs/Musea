@@ -1,0 +1,204 @@
+<div class="row no-gutters d-flex flex-column mx-auto pr-lg-4">
+    <h4>Details wijzigen</h4>
+
+    <div *ngIf="error" class="p-1 alert alert-danger">
+        <p class="m-0">{{ error }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit(form)" [formGroup]="form" class="d-flex flex-column">
+        <div class="form-group">
+            <label for="email">Email
+        <span
+          class="text-danger"
+          *ngIf="form.controls['email'].errors && form.controls['email'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="email"
+        class="form-control"
+        formControlName="email"
+        type="text"
+        placeholder="Email"
+        [class.valid]="form.controls['email'].valid && form.controls['email'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['email'].invalid) ||
+          (form.controls['email'].invalid && form.controls['email'].dirty) ||
+          error
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['email'].invalid) ||
+          (form.controls['email'].invalid && form.controls['email'].dirty) ||
+          error
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['email'].hasError('required')">
+          Email is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="form.controls['email'].hasError('email')">
+          Voer in een geldig email.
+        </small>
+        <small class="text-danger" *ngIf="error">
+          Dit email is al in gebruik
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="firstName"
+        >Voornaam
+        <span
+          class="text-danger"
+          *ngIf="form.controls['firstName'].errors && form.controls['firstName'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="firstName"
+        class="form-control"
+        formControlName="firstName"
+        type="text"
+        placeholder="Voornaam"
+        [class.valid]="form.controls['firstName'].valid && form.controls['firstName'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['firstName'].invalid) ||
+          (form.controls['firstName'].invalid && form.controls['firstName'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['firstName'].invalid) ||
+          (form.controls['firstName'].invalid && form.controls['firstName'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['firstName'].hasError('required')">
+          Voornaam is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName"
+        >Achternaam
+        <span
+          class="text-danger"
+          *ngIf="form.controls['lastName'].errors && form.controls['lastName'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="lastName"
+        class="form-control"
+        formControlName="lastName"
+        type="text"
+        placeholder="Achternaam"
+        [class.valid]="form.controls['lastName'].valid && form.controls['lastName'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['lastName'].invalid) ||
+          (form.controls['lastName'].invalid && form.controls['lastName'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['lastName'].invalid) ||
+          (form.controls['lastName'].invalid && form.controls['lastName'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['lastName'].hasError('required')">
+          Achternaam is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="gender"
+        >Geslacht
+        <span
+          class="text-danger"
+          *ngIf="form.controls['gender'].errors && form.controls['gender'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <select
+        id="gender"
+        class="form-control"
+        formControlName="gender"
+        [class.valid]="form.controls['gender'].valid && form.controls['gender'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['gender'].invalid) ||
+          (form.controls['gender'].invalid && form.controls['gender'].dirty)
+        "
+        required
+      >
+        <option value="" disabled selected>Selecteer geslacht</option>
+        <option *ngFor="let gender of genders" [value]="gender">{{ GenderLabel[gender] }}</option>
+      </select>
+      <div
+        *ngIf="
+          (submitted && form.controls['gender'].invalid) ||
+          (form.controls['gender'].invalid && form.controls['gender'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['gender'].hasError('required')">
+          Kies een geslacht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="birthDate"
+        >Geboortedatum
+        <span
+          class="text-danger"
+          *ngIf="form.controls['birthDate'].errors && form.controls['birthDate'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="birthDate"
+        class="form-control"
+        formControlName="birthDate"
+        type="date"
+        placeholder="Geboortedatum"
+        [class.valid]="form.controls['birthDate'].valid && form.controls['birthDate'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['birthDate'].invalid) ||
+          (form.controls['birthDate'].invalid && form.controls['birthDate'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['birthDate'].invalid) ||
+          (form.controls['birthDate'].invalid && form.controls['birthDate'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['birthDate'].hasError('required')">
+          Geboortedatum is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="form.controls['birthDate'].hasError('notInFuture')">
+          Geboortedatum mag niet in de toekomst liggen.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark">
+        <span *ngIf="saving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Opslaan
+        <span *ngIf="saving" class="sr-only">Saving...</span>
+      </button>
+      <a (click)="back()" class="btn btn-dark ml-1">Annuleer</a>
+    </div>
+  </form>
+</div>

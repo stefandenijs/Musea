@@ -1,0 +1,12 @@
+<div class="row no-gutters mx-auto" *ngIf="user">
+    <div class="col-lg-12 col-md-12 col-sm-12 order-lg-1 order-second">
+        <h4>Details:</h4>
+        <p class="m-0">Naam: {{ user.firstName + ' ' + user.lastName }}</p>
+        <p class="m-0">Email: {{ user.email }}</p>
+        <p class="m-0">Geslacht: {{ user.gender }}</p>
+        <p class="m-0">Geboortedatum: {{ user.birthDate | date: 'dd-MM-yyyy' }}</p>
+        <div *ngIf="loggedInUser$ | async as logUser" class="mt-2">
+            <a id="changebutton" *ngIf="logUser.role === 'admin' && logUser._id !== user._id" [routerLink]="['/users', user._id ,'details', 'edit']" class="btn btn-dark">Wijzig gebruiker</a>
+        </div>
+    </div>
+</div>

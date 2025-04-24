@@ -1,0 +1,345 @@
+<div class="col-sm-12 col-lg-8">
+    <h2>Museumformulier</h2>
+
+    <div *ngIf="error" class="p-1 alert alert-danger">
+        <p class="m-0">{{ error }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit(form)" [formGroup]="form" class="d-flex flex-column">
+        <div class="form-group">
+            <label for="name">Naam
+        <span
+          class="text-danger"
+          *ngIf="form.controls['name'].errors && form.controls['name'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="name"
+        class="form-control"
+        formControlName="name"
+        type="text"
+        placeholder="Naam"
+        [class.valid]="form.controls['name'].valid && form.controls['name'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['name'].invalid) ||
+          (form.controls['name'].invalid && form.controls['name'].dirty) ||
+          error
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['name'].invalid) ||
+          (form.controls['name'].invalid && form.controls['name'].dirty) ||
+          error
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['name'].hasError('required')">
+          Naam is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="error"> Naam is al in gebruik. </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description"
+        >Beschrijving
+        <span
+          class="text-danger"
+          *ngIf="form.controls['description'].errors && form.controls['description'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+        placeholder="Beschrijving"
+        [class.valid]="form.controls['description'].valid && form.controls['description'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['description'].invalid) ||
+          (form.controls['description'].invalid && form.controls['description'].dirty)
+        "
+        required
+      ></textarea>
+      <div
+        *ngIf="
+          (submitted && form.controls['description'].invalid) ||
+          (form.controls['description'].invalid && form.controls['description'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['description'].hasError('required')">
+          Beschrijving is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city"
+        >Plaats
+        <span
+          class="text-danger"
+          *ngIf="form.controls['city'].errors && form.controls['city'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="city"
+        class="form-control"
+        formControlName="city"
+        type="text"
+        placeholder="Plaats"
+        [class.valid]="form.controls['city'].valid && form.controls['city'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['city'].invalid) ||
+          (form.controls['city'].invalid && form.controls['city'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['city'].invalid) ||
+          (form.controls['city'].invalid && form.controls['city'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['city'].hasError('required')">
+          Plaats is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row no-gutters">
+        <div class="col-6 pr-1">
+          <label for="street"
+            >Straat
+            <span
+              class="text-danger"
+              *ngIf="form.controls['street'].errors && form.controls['street'].hasError('required')"
+              >*</span
+            ></label
+          >
+          <input
+            id="street"
+            class="form-control"
+            formControlName="street"
+            type="text"
+            placeholder="Straat"
+            [class.valid]="form.controls['street'].valid && form.controls['street'].dirty"
+            [class.invalid]="
+              (submitted && form.controls['street'].invalid) ||
+              (form.controls['street'].invalid && form.controls['street'].dirty)
+            "
+            required
+          />
+          <div
+            *ngIf="
+              (submitted && form.controls['street'].invalid) ||
+              (form.controls['street'].invalid && form.controls['street'].dirty)
+            "
+            class="alert mb-0 p-0"
+          >
+            <small class="text-danger" *ngIf="form.controls['street'].hasError('required')">
+              Straat is verplicht.
+            </small>
+          </div>
+        </div>
+        <div class="col-6 pl-1">
+          <label for="streetNumber"
+            >Straatnummer
+            <span
+              class="text-danger"
+              *ngIf="
+                form.controls['streetNumber'].errors && form.controls['streetNumber'].hasError('required')
+              "
+              >*</span
+            ></label
+          >
+          <input
+            id="streetNumber"
+            class="form-control"
+            formControlName="streetNumber"
+            type="number"
+            placeholder="Straatnummer"
+            [class.valid]="form.controls['streetNumber'].valid && form.controls['streetNumber'].dirty"
+            [class.invalid]="
+              (submitted && form.controls['streetNumber'].invalid) ||
+              (form.controls['streetNumber'].invalid && form.controls['streetNumber'].dirty)
+            "
+            required
+          />
+          <div
+            *ngIf="
+              (submitted && form.controls['streetNumber'].invalid) ||
+              (form.controls['streetNumber'].invalid && form.controls['streetNumber'].dirty)
+            "
+            class="alert mb-0 p-0"
+          >
+            <small class="text-danger" *ngIf="form.controls['streetNumber'].hasError('required')">
+              Straatnummer is verplicht.
+            </small>
+            <small class="text-danger" *ngIf="form.controls['streetNumber'].hasError('min')">
+              Een geldig straatnummer is verplicht.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="postalCode"
+        >Postcode
+        <span
+          class="text-danger"
+          *ngIf="form.controls['postalCode'].errors && form.controls['postalCode'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="postalCode"
+        class="form-control"
+        formControlName="postalCode"
+        type="text"
+        placeholder="Postcode"
+        [class.valid]="form.controls['postalCode'].valid && form.controls['postalCode'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['postalCode'].invalid) ||
+          (form.controls['postalCode'].invalid && form.controls['postalCode'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['postalCode'].invalid) ||
+          (form.controls['postalCode'].invalid && form.controls['postalCode'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['postalCode'].hasError('required')">
+          Postcode is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="form.controls['postalCode'].hasError('pattern')">
+          Voer in een geldige postcode.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber"
+        >Telefoonnummer
+        <span
+          class="text-danger"
+          *ngIf="form.controls['phoneNumber'].errors && form.controls['phoneNumber'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="phoneNumber"
+        class="form-control"
+        formControlName="phoneNumber"
+        type="text"
+        placeholder="Telefoonnummer"
+        [class.valid]="form.controls['phoneNumber'].valid && form.controls['phoneNumber'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['phoneNumber'].invalid) ||
+          (form.controls['phoneNumber'].invalid && form.controls['phoneNumber'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['phoneNumber'].invalid) ||
+          (form.controls['phoneNumber'].invalid && form.controls['phoneNumber'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['phoneNumber'].hasError('required')">
+          Telefoonnummer is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="website"
+        >Website
+        <span
+          class="text-danger"
+          *ngIf="form.controls['website'].errors && form.controls['website'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="website"
+        class="form-control"
+        formControlName="website"
+        type="text"
+        placeholder="Website"
+        [class.valid]="form.controls['website'].valid && form.controls['website'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['website'].invalid) ||
+          (form.controls['website'].invalid && form.controls['website'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['website'].invalid) ||
+          (form.controls['website'].invalid && form.controls['website'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['website'].hasError('required')">
+          Website is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="imgUrl"
+        >Link naar museum foto
+        <span
+          class="text-danger"
+          *ngIf="form.controls['imgUrl'].errors && form.controls['imgUrl'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="imgUrl"
+        class="form-control"
+        formControlName="imgUrl"
+        type="text"
+        placeholder="Link naar museum foto"
+        [class.valid]="form.controls['imgUrl'].valid && form.controls['imgUrl'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['imgUrl'].invalid) ||
+          (form.controls['imgUrl'].invalid && form.controls['imgUrl'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['imgUrl'].invalid) ||
+          (form.controls['imgUrl'].invalid && form.controls['imgUrl'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['imgUrl'].hasError('required')">
+          Link foto is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark">
+        <span *ngIf="saving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Opslaan
+        <span *ngIf="saving" class="sr-only">Saving...</span>
+      </button>
+      <a (click)="back()" class="btn btn-dark ml-1">Annuleer</a>
+    </div>
+  </form>
+</div>

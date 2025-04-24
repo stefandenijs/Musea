@@ -1,0 +1,21 @@
+<div class="row no-gutters mx-auto" *ngIf="user">
+    <div class="col-lg-12 col-md-12 col-sm-12 order-lg-1 order-second pr-lg-4">
+        <table *ngIf="user.friends.length > 0" class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Vrienden</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let friend of user.friends">
+                <td class="row no-gutters">
+                    <a class="my-auto" [title]="friend.firstName + ' ' + friend.lastName" [routerLink]="['/users', friend._id]">{{ friend.firstName + ' ' + friend.lastName }}</a
+          >
+        </td>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="user.friends.length < 1">
+    <h4 class="pb-2">Vrienden:</h4>
+    <p>Geen vrienden aanwezig</p>
+  </div>
+</div>

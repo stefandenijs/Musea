@@ -1,0 +1,5 @@
+<div class="d-flex justify-content-center col-12 alert-popup" *ngIf="alert && !staticAlertClosed">
+    <div [ngClass]="alert?.type === 'success' ? 'bg-success border-success text-white' : 'bg-danger border-danger text-white'" class="text-center border p-2 alert  col-8 col-md-6 col-lg-6">
+        <p class="mb-0">{{alert.message}}</p>
+    </div>
+</div>

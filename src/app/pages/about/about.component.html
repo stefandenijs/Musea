@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-sm-6 col-md-8 col-lg-9">
+        <h1 id="aboutTitle">Over deze applicatie</h1>
+        <p>
+            Deze applicatie is gemaakt in het kader van het vak 'Clientside web frameworks' van Avans Hogeschool Breda.
+        </p>
+        <h3>Wat is Musea?</h3>
+        <p>
+            <!-- <span style="color: red">Hier beschrijft je wat je project inhoudt. Beschrijf ook de entiteiten/domeinobjecten die je
+        gebruikt, en benoem per entiteit de attributen met hun datatype.</span
+      > -->
+            Mijn project is een website waarop gebruikers tentoonstellingen kunnen vinden van museums. Hier kunnen zij informatie over museums zoeken en welke tentoonstellingen deze museums hebben. Bij de tentoonstellingen kunnen gebruikers entreetickets kopen om
+            toegang te krijgen tot de tentoonstelling bij de bijbehorende museum. Verder zullen gebruikers een lijst van vrienden kunnen aanmaken. Als laatste zullen zij ook gebruikers tentoonst aangeraden worden op hun aankopen of de aankopen van vrienden.
+        </p>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card">
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="assets/images/stefan.png" class="card-img-top about-img border profile-pic" alt="Stefan de Nijs" />
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Stefan de Nijs</h5>
+                <p class="card-text">Studentnummer: 2126933</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Entiteiten</h3>
+<p>
+    <!-- <span style="color: red"
+    >Beschrijf hier jouw entiteiten, zodanig dat we de complexiteit en de onderlinge relaties ervan kunnen
+    beoordelen. Voeg ook een plaatje toe waarin je je datamodel visualiseert.</span
+  > -->
+    Het datamodel bestaat uit gebruikers, vriendschapverzoeken, museums, tentoonstellingen en tickets. De datavelden kunt u onderin inzien. Een gebruiker bestaat op zichzelf en bestaat uit een aantal velden die gebruikelijk zijn bij een gebruiker van een
+    website. Buiten de de kerndata van een gebruiker zal hij ook een lijst van vrienden (gebruikers) hebben, voordat een vriend kan toegevoegd kan worden moet hiervoor een vriendschapverzoek gestuurd worden die als een lijst ook in de gebruiker staat.
+    Een museum is een entiteit die op zichzelf bestaat. Deze bestaat uit een aantal velden die beschrijven wat het museum is, hoe het bereikbaar is en de website hiervan. Een museum zal verder een lijst van de entiteit tentoonstelling bevatten. Deze bestaat
+    uit een naam, beschrijving en thema bestaan. Daarnaast zal een tentoonstelling informatie bevatten over wanneer deze bezoekbaar is, wat de entree prijs is voor een ticket en de tijden voor elke dag. Als laatste is er nog de entiteit ticket. Deze kan
+    alleen bestaan als er een tentoonstelling en gebruiker bestaat waar deze aan gekoppelt is. Een ticket bevat referenties naar de tentoonstelling en de gebruiker. Daarnaast bevat een ticket de datum van aankoop en status of de ticket nog geldig is,
+    gedeactiveerd of geannuleerd.
+</p>
+<div class="row">
+    <div class="col-sm-12 col-md-3">
+        <p>Museum</p>
+        <ul>
+            <li>id: string (Mongo Id)</li>
+            <li>name: string</li>
+            <li>description: string</li>
+            <li>city: string</li>
+            <li>street: string</li>
+            <li>postalCode: string</li>
+            <li>conctactPhone: string</li>
+            <li>website: string</li>
+            <li>imgUrl: string</li>
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-3">
+        <p>Exhibition (Tentoonstelling)</p>
+        <ul>
+            <li>id: string (Mongo Id)</li>
+            <li>naam: string</li>
+            <li>description: string</li>
+            <li>theme: string</li>
+            <li>price: number</li>
+            <li>startDate: date</li>
+            <li>endDate: date</li>
+            <li>startTime: date</li>
+            <li>endTime: date</li>
+            <li>imgUrl: string</li>
+            <li>Museum: Museum reference</li>
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-3">
+        <p>Ticket</p>
+        <ul>
+            <li>id: string (Mongo Id)</li>
+            <li>priceAtPurchase: number</li>
+            <li>dateOfPurchase: date</li>
+            <li>status: Enum (code) -> string (db)</li>
+            <li>exhibition: Exhibition reference</li>
+            <li>user: User reference</li>
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-3">
+        <p>User (Gebruiker)</p>
+        <ul>
+            <li>id: string (Mongo Id)</li>
+            <li>firstName: string</li>
+            <li>lastName: string</li>
+            <li>email: string</li>
+            <li>password: string -> hash (db)</li>
+            <li>gender: Gender (code) -> string (db)</li>
+            <li>BirthDate: date</li>
+            <li>Role: Role (code) -> string (db)</li>
+            <li>friends: User[] references</li>
+            <li>friendRequests: FriendRequests[] references</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <img class="img-fluid" src="assets/images/datamodel.png" alt="Datamodel" />
+    </div>
+</div>
+
+<div class="row flex-columns mt-4">
+    <div class="col-12">
+        <h3>CI/CD tests</h3>
+    </div>
+    <div class="col-12">
+        <img class="img-fluid" src="../../../assets/images/ci-cd-tests.png" alt="Tests" />
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col">
+        <h3>User Use Cases</h3>
+        <p>
+            Hieronder vindt u de usecases voor de verschillende entiteiten van mijn project. De usecases beschrijven de gewenste functionaliteit die er zal komen in verband met de entiteiten.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h4>User Use Cases</h4>
+        <div *ngFor="let UC of useCasesUser">
+            <app-usecase [useCase]="UC"></app-usecase>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h4>Museum Use Cases</h4>
+        <div *ngFor="let UC of useCasesMuseum">
+            <app-usecase [useCase]="UC"></app-usecase>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h4>Tentoonstelling Use Cases</h4>
+        <div *ngFor="let UC of useCasesExhibition">
+            <app-usecase [useCase]="UC"></app-usecase>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h4>Ticket Use Cases</h4>
+        <div *ngFor="let UC of useCasesTicket">
+            <app-usecase [useCase]="UC"></app-usecase>
+        </div>
+    </div>
+</div>

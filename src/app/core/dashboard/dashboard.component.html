@@ -1,0 +1,97 @@
+<div class="starter-template">
+    <div [style.background-image]="'url(../../../../assets/images/rijksmuseum.jpg)'" class="jumbotron museum-cover">
+        <div class="rounded museum-cover-box p-3">
+            <h1 class="text-white">Musea</h1>
+            <p class="text-white lead">Voor de beste suggesties voor uitjes naar een museum.</p>
+            <hr class="border-white" />
+            <a class="btn btn-outline-light" routerLink="/about">Over Musea</a>
+        </div>
+    </div>
+
+    <div class="container-fluid mb-4 p-0">
+        <div *ngIf="recommended && recommended.length > 0">
+            <h2>Aangeraden tentoonstellingen</h2>
+            <div class="container-fluid mb-4 p-0">
+                <div class="row">
+                    <div *ngFor="let recomm of recommended" class="col-lg-3 col-md-6 col-sm-12 mt-3 d-flex align-items-stretch">
+                        <div class="card shadow" style="width: 18rem">
+                            <img [src]="recomm.imgUrl" class="card-img-top" [alt]="recomm.name + ' foto'" />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ recomm.name }}</h5>
+                                <small class="card-text mb-2">
+                  {{ recomm.museum?.street }} {{ recomm.museum?.streetNumber }},
+                  {{ recomm.museum?.postalCode }}
+                  {{ recomm.museum?.city }}
+                </small>
+                                <a [routerLink]="['/museums', recomm.museum?._id, 'exhibitions', recomm._id]" class="btn btn-dark mt-auto">Meer details</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="visitedByFriends && visitedByFriends.length > 0">
+      <h2>Bezocht door vrienden</h2>
+      <div class="container-fluid mb-4 p-0">
+        <div class="row">
+          <div
+            *ngFor="let visited of visitedByFriends"
+            class="col-lg-3 col-md-6 col-sm-12 mt-3 d-flex align-items-stretch"
+          >
+            <div class="card shadow" style="width: 18rem">
+              <img [src]="visited.imgUrl" class="card-img-top" [alt]="visited.name + ' foto'" />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ visited.name }}</h5>
+                <small class="card-text mb-2">
+                  {{ visited.museum?.street }} {{ visited.museum?.streetNumber }},
+                  {{ visited.museum?.postalCode }}
+                  {{ visited.museum?.city }}
+                </small>
+                <a
+                  [routerLink]="['/museums', visited.museum?._id, 'exhibitions', visited._id]"
+                  class="btn btn-dark mt-auto"
+                  >Meer details</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Meest recente tentoonstellingen</h2>
+      <div class="row">
+        <div
+          *ngFor="let recent of mostRecent"
+          class="col-lg-3 col-md-6 col-sm-12 mt-3 d-flex align-items-stretch"
+        >
+          <div class="card shadow" style="width: 18rem">
+            <img [src]="recent.imgUrl" class="card-img-top" [alt]="recent.name + ' foto'" />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ recent.name }}</h5>
+              <small class="card-text mb-2">
+                {{ recent.museum?.street }} {{ recent.museum?.streetNumber }},
+                {{ recent.museum?.postalCode }}
+                {{ recent.museum?.city }}
+              </small>
+              <a
+                [routerLink]="['/museums', recent.museum?._id, 'exhibitions', recent._id]"
+                class="btn btn-dark mt-auto"
+                >Meer details</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container p-0">
+      <h3>Info</h3>
+      <p>
+        This app is running in <strong>'{{ runningMode }}'</strong> mode. <br />
+        Environment API URL: <strong>'{{ apiUrl }}'</strong>.<br />
+        Version: <strong>{{ version }}</strong>
+      </p>
+    </div>
+  </div>
+</div>

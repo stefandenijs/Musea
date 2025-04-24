@@ -1,0 +1,28 @@
+<div class="d-flex mb-2 mb-md-4 mb-lg-4 border-bottom border-dark">
+    <h2>Tentoonstellingen</h2>
+</div>
+
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="d-flex justify-content-center" *ngIf="exhibitions && exhibitions?.length == 0 && !loading">
+    <p class="h4">Geen tentoonstellingen gevonden.</p>
+</div>
+
+<div class="container-fluid p-0" *ngIf="exhibitions?.length != 0">
+    <div class="row">
+        <div *ngFor="let exhibition of exhibitions" class="col-lg-3 col-md-4 col-sm-12 mt-3 d-flex align-items-stretch">
+            <div class="col-12 p-0 card shadow" style="width: 18rem">
+                <img [src]="exhibition.imgUrl" class="card-img-top" alt="Tentoonstelling foto" />
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ exhibition.name }}</h5>
+                    <small class="card-text mb-2">
+            {{ exhibition.museum?.street }} {{ exhibition.museum?.streetNumber }},
+            {{ exhibition.museum?.postalCode }} {{ exhibition.museum?.city }}
+          </small>
+                    <a [routerLink]="['/museums', exhibition.museum?._id, 'exhibitions', exhibition._id]" class="btn btn-dark mt-auto">Meer details</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,345 @@
+<div class="col-sm-12 col-lg-8">
+    <h2>Tentoonstelling formulier</h2>
+
+    <div *ngIf="error" class="p-1 alert alert-danger">
+        <p class="m-0">{{ error }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit(form)" [formGroup]="form" class="d-flex flex-column">
+        <div class="form-group">
+            <label for="name">Naam
+        <span
+          class="text-danger"
+          *ngIf="form.controls['name'].errors && form.controls['name'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="name"
+        class="form-control"
+        formControlName="name"
+        type="text"
+        placeholder="Naam"
+        [class.valid]="form.controls['name'].valid && form.controls['name'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['name'].invalid) ||
+          (form.controls['name'].invalid && form.controls['name'].dirty) || error
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['name'].invalid) ||
+          (form.controls['name'].invalid && form.controls['name'].dirty) || error
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['name'].hasError('required')">
+          Naam is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="error"> Naam is al in gebruik. </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description"
+        >Beschrijving
+        <span
+          class="text-danger"
+          *ngIf="form.controls['description'].errors && form.controls['description'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+        placeholder="Beschrijving"
+        [class.valid]="form.controls['description'].valid && form.controls['description'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['description'].invalid) ||
+          (form.controls['description'].invalid && form.controls['description'].dirty)
+        "
+        required
+      ></textarea>
+      <div
+        *ngIf="
+          (submitted && form.controls['description'].invalid) ||
+          (form.controls['description'].invalid && form.controls['description'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['description'].hasError('required')">
+          Beschrijving is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="theme"
+        >Thema
+        <span
+          class="text-danger"
+          *ngIf="form.controls['theme'].errors && form.controls['theme'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="theme"
+        class="form-control"
+        formControlName="theme"
+        type="text"
+        placeholder="Thema"
+        [class.valid]="form.controls['theme'].valid && form.controls['theme'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['theme'].invalid) ||
+          (form.controls['theme'].invalid && form.controls['theme'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['theme'].invalid) ||
+          (form.controls['theme'].invalid && form.controls['theme'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['theme'].hasError('required')">
+          Thema is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price"
+        >Entreeprijs
+        <span
+          class="text-danger"
+          *ngIf="form.controls['price'].errors && form.controls['price'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="price"
+        class="form-control"
+        formControlName="price"
+        type="number"
+        step="any"
+        placeholder="Entreeprijs"
+        [class.valid]="form.controls['price'].valid && form.controls['price'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['price'].invalid) ||
+          (form.controls['price'].invalid && form.controls['price'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['price'].invalid) ||
+          (form.controls['price'].invalid && form.controls['price'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['price'].hasError('required')">
+          Entreeprijs is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="form.controls['price'].hasError('min')">
+          Entreeprijs mag niet negatief zijn.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="startDate"
+        >Startdatum
+        <span
+          class="text-danger"
+          *ngIf="form.controls['startDate'].errors && form.controls['startDate'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="startDate"
+        class="form-control"
+        formControlName="startDate"
+        type="date"
+        placeholder="Startdatum"
+        [class.valid]="form.controls['startDate'].valid && form.controls['startDate'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['startDate'].invalid) ||
+          (form.controls['startDate'].invalid && form.controls['startDate'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['startDate'].invalid) ||
+          (form.controls['startDate'].invalid && form.controls['startDate'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['startDate'].hasError('required')">
+          Startdatum is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="endDate"
+        >Einddatum
+        <span
+          class="text-danger"
+          *ngIf="form.controls['endDate'].errors && form.controls['endDate'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="endDate"
+        class="form-control"
+        formControlName="endDate"
+        type="date"
+        placeholder="Einddatum"
+        [class.valid]="form.controls['endDate'].valid && form.controls['endDate'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['endDate'].invalid) ||
+          (form.controls['endDate'].invalid && form.controls['endDate'].dirty) ||
+          form.hasError('endDateError')
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['endDate'].invalid) ||
+          (form.controls['endDate'].invalid && form.controls['endDate'].dirty) ||
+          form.hasError('endDateError')
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['endDate'].hasError('required')">
+          Einddatum is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="form.hasError('endDateError')">
+          Einddatum mag niet gelijk met of voor startdatum vallen.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dayStartTime"
+        >Starttijd
+        <span
+          class="text-danger"
+          *ngIf="form.controls['dayStartTime'].errors && form.controls['dayStartTime'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="dayStartTime"
+        class="form-control"
+        formControlName="dayStartTime"
+        type="time"
+        placeholder="Starttijd"
+        [class.valid]="form.controls['dayStartTime'].valid && form.controls['dayStartTime'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['dayStartTime'].invalid) ||
+          (form.controls['dayStartTime'].invalid && form.controls['dayStartTime'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['dayStartTime'].invalid) ||
+          (form.controls['dayStartTime'].invalid && form.controls['dayStartTime'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['dayStartTime'].hasError('required')">
+          Starttijd is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dayEndTime"
+        >Eindtijd
+        <span
+          class="text-danger"
+          *ngIf="form.controls['dayEndTime'].errors && form.controls['dayEndTime'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="dayEndTime"
+        class="form-control"
+        formControlName="dayEndTime"
+        type="time"
+        placeholder="Eindtijd"
+        [class.valid]="form.controls['dayEndTime'].valid && form.controls['dayEndTime'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['dayEndTime'].invalid) ||
+          (form.controls['dayEndTime'].invalid && form.controls['dayEndTime'].dirty) ||
+          form.hasError('endTimeError')
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['dayEndTime'].invalid) ||
+          (form.controls['dayEndTime'].invalid && form.controls['dayEndTime'].dirty) ||
+          form.hasError('endTimeError')
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['dayEndTime'].hasError('required')">
+          Eindtijd is verplicht.
+        </small>
+        <small class="text-danger" *ngIf="form.hasError('endTimeError')">
+          Eindtijd mag niet gelijk met of voor starttijd vallen.
+        </small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="imgUrl"
+        >Link tentoonstelling foto
+        <span
+          class="text-danger"
+          *ngIf="form.controls['imgUrl'].errors && form.controls['imgUrl'].hasError('required')"
+          >*</span
+        ></label
+      >
+      <input
+        id="imgUrl"
+        class="form-control"
+        formControlName="imgUrl"
+        type="text"
+        placeholder="Link tentoonstelling foto"
+        [class.valid]="form.controls['imgUrl'].valid && form.controls['imgUrl'].dirty"
+        [class.invalid]="
+          (submitted && form.controls['imgUrl'].invalid) ||
+          (form.controls['imgUrl'].invalid && form.controls['imgUrl'].dirty)
+        "
+        required
+      />
+      <div
+        *ngIf="
+          (submitted && form.controls['imgUrl'].invalid) ||
+          (form.controls['imgUrl'].invalid && form.controls['imgUrl'].dirty)
+        "
+        class="alert mb-0 p-0"
+      >
+        <small class="text-danger" *ngIf="form.controls['imgUrl'].hasError('required')">
+          Link foto is verplicht.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark">
+        <span *ngIf="saving" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Opslaan
+        <span *ngIf="saving" class="sr-only">Saving...</span>
+      </button>
+      <a (click)="back()" class="btn btn-dark ml-1">Annuleer</a>
+    </div>
+  </form>
+</div>

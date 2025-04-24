@@ -1,0 +1,23 @@
+<div class="row no-gutters mx-auto pr-0 pr-md-4 pr-lg-4" *ngIf="loggedInUser$ | async as user">
+    <div class="col-lg-12 col-md-12 col-sm-12 order-lg-1 order-second">
+        <h4 class="mb-2">Vriendschap veroeken:</h4>
+        <div *ngIf="user.friendRequests && user.friendRequests.length > 0">
+            <div class="border border-dark rounded p-2 mt-2 row no-gutters" *ngFor="let request of user.friendRequests">
+                <div class="col-12 row no-gutters" *ngIf="request">
+                    <div class="col-12 col-lg-6">
+                        <a [routerLink]="['/users', request.sender?._id]" class="font-weight-bold h4 mb-0">{{ request.sender?.firstName }} {{ request.sender?.lastName }}</a
+            >
+            <p class="mb-0">{{ request.sender?.email }}</p>
+          </div>
+          <div class="row no-gutters col-12 col-lg-6 d-flex align-items-center mt-1 mt-lg-0">
+            <button (click)="acceptRequest(user._id!, request._id!)" class="btn btn-dark ml-lg-auto">
+              Accepteer
+            </button>
+            <button (click)="refuseRequest(user._id!, request._id!)" class="btn btn-dark ml-1">Weiger</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="user.friendRequests && user.friendRequests.length < 1">Geen verzoeken gevonden.</p>
+  </div>
+</div>

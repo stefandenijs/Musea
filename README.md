@@ -1,5 +1,5 @@
 # Musea
-AngularJS project code from the client-side frameworks project of Avans Hogeschool year 2 (2022)
+AngularJS project code from the client-side frameworks project of Avans Hogeschool year 2 (2022). Originally hosted on GitLab.
 
 
 ## Angular Gitlab Heroku example

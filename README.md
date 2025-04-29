@@ -1,8 +1,8 @@
-# musea
+# Musea
 AngularJS project code from the client-side frameworks project of Avans Hogeschool year 2 (2022)
 
 
-# Angular Gitlab Heroku example
+## Angular Gitlab Heroku example
 
 Example project that illustrates how to prepare a generated Angular app and deploy it to [Heroku](http://www.heroku.com).
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
